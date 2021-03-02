@@ -11,6 +11,12 @@ class Reservations(models.Model):
         if self.ticket.remaining_tickets() > 0 and self.ticket.event.start > now():
             super(Reservations, self).save(*args, **kwargs)
 
+    def payed(self):
+        if self.payment_time:
+            return True
+        else:
+            return False
+
 class Tickets(models.Model):
     event = models.ForeignKey("Events", on_delete=models.CASCADE)
     ticket_type = models.CharField(max_length=50)
@@ -36,6 +42,6 @@ class Events(models.Model):
         tickets = Tickets.objects.filter(event=self)
         ticket_list = []
         for t in tickets:
-            ticket_list.append({'ticket_type': t.ticket_type,'remaining_tickets': t.remaining_tickets()})
+            ticket_list.append({'ticket_type': t.ticket_type,'sold_tickets': t.sold_tickets()})
         return ticket_list
     

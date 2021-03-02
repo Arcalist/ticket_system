@@ -46,12 +46,12 @@ class Payment(APIView):
         
 
 class ReservationDetail(APIView):
-    def get(self, request, format=None):
+    def get(self, request, pk, format=None):
         try:
-            event = Reservations.objects.get(pk=pk)
+            reservation = Reservations.objects.get(pk=pk)
         except Event.DoesNotExist:
             raise Http404
-        serializer = EventDetailSerializer(event)
+        serializer = ReservationSerializer(reservation)
         return Response(serializer.data)
     
 

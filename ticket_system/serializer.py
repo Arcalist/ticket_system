@@ -11,15 +11,15 @@ class EventDetailSerializer(serializers.ModelSerializer):
 class TicketListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tickets
-        fields = ['id', 'event', 'ticket_type', 'stock', 'price', 'sold_tickets', 'remaining_tickets']
-        read_only_fields = ['sold_tickets', 'remaining_tickets']
+        fields = ['id', 'event', 'ticket_type', 'stock', 'price', 'remaining_tickets']
+        read_only_fields = ['remaining_tickets']
 
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservations
-        fields = ['id', 'ticket', 'reservation_time', 'payment_time']
-        read_only_fields = ['reservation_time', 'payment_time']
+        fields = ['id', 'ticket', 'reservation_time', 'payment_time', 'payed']
+        read_only_fields = ['reservation_time', 'payment_time', 'payed']
 
 
 class ReservationStatisticsSerializer(serializers.ModelSerializer):
